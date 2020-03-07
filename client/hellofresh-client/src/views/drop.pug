@@ -1,0 +1,14 @@
+//- .tile.is-ancestor
+//- 	.tile.is-horizontal
+//- button.tile(@click='search') Search!!
+.tile.is-ancestor.is-12
+	.tile.is-parent
+		input.input.tile.is-child(placeholder="general search" type="text" v-model='ingredient' @keyup.enter='search')
+
+		input.input.tile.is-child(placeholder="ingredient searcg" type="text" v-model='ingredient' @keyup.enter='search' @keyup='ingFilter(ingredient)')
+		div.tile.is-child
+			div(class='dropdown' :class="{'is-active' : ingListFilter.length > 0}")
+				.dropdown-menu
+					.dropdown-content
+						div.dropdown-item(v-for='(data, index) in ingListFilter' :key='index') {{data}}
+

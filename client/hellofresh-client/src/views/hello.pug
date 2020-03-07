@@ -1,0 +1,18 @@
+.container
+  include ./drop
+
+  p(v-if='count') {{count}} recipes found
+  .tile.is-ancestor.is-12
+    ul.tile.is-parent.is-vertical.is-8
+      li.box.tile.is-child(v-for='(data, index) in recipes' :key='index')
+        .has-text-left
+          p.title.is-4 {{data.name}}
+          p.heading {{data.headline}}
+          p.tag.is-primary prep time {{pt(data.prepTime)}} Min
+    //- .tile.is-ancestor.is-6
+    div
+      span.tag.button(v-for='(ing, index) in returnedIng' :key='index' :title="ing.count + ' recipes'") {{ing.ing}}({{ing.count}})
+
+      //- .level-item
+
+      //- p {{data.description}}
