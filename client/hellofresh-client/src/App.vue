@@ -1,8 +1,13 @@
 <template>
     <div id="app">
+			<div>
+			</div>
         <!-- <Skills /> -->
         <search />
+				<!-- <font-awesome-icon :icon="['far', 'user-secret']" /> -->
+
 				<!-- <hello/> -->
+
     </div>
 </template>
 <script>

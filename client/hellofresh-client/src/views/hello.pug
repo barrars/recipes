@@ -1,18 +1,20 @@
 .container
   include ./drop
-
-  p(v-if='count') {{count}} recipes found
+  div
+    span.tag.button( v-for='(value,time,   index) in cookTime' :key='index' @click='timeClick(time)') {{time}} min({{value}})
+  p(v-if='(filter.length)') {{filter.length}} recipes found
   .tile.is-ancestor.is-12
-    ul.tile.is-parent.is-vertical.is-8
-      li.box.tile.is-child(v-for='(data, index) in recipes' :key='index')
-        .has-text-left
-          p.title.is-4 {{data.name}}
-          p.heading {{data.headline}}
-          p.tag.is-primary prep time {{pt(data.prepTime)}} Min
-    //- .tile.is-ancestor.is-6
+    ul.tile.is-parent.is-vertical.is-6
+      li.box.tile.is-child(v-for='(data, index) in filter' :key='index' v-if='(index < 10)')
+        a(:href=`data.cardLink`, target='_blank')
+          .has-text-left
+            .tag.is-primary
+              p {{data.category.slug }} {{pt(data.prepTime)}}
+                i.far.fa-clock
+            p.title.is-4 {{data.name}}
+            p.heading {{data.headline}}
+          img(:src=`imgPrefix + data.imagePath`)
     div
-      span.tag.button(v-for='(ing, index) in returnedIng' :key='index' :title="ing.count + ' recipes'") {{ing.ing}}({{ing.count}})
+      span.tag.button(v-for='(ing, index) in ingredients' :key='index' :title="ing.count + ' recipes'" @click='ingClick(ing.ing)') {{ing.ing}}({{ing.count}})
 
-      //- .level-item
 
-      //- p {{data.description}}
