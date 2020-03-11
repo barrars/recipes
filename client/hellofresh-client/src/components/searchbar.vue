@@ -88,15 +88,25 @@ export default {
         },
     },
     methods: {
+			dropClick(e){
+				console.log(e.target.innerText);
+				let text = e.target.innerText
+				this.ingredient = text
+				this.search()
+				this.ingredient = ''
+				text = ''
+				this.ingFilter(text)
+
+			},
         timeClick(e) {
-					console.log(e);
+					// console.log(e);
             let index = this.timeArr.findIndex(i => i === e);
             if (!this.timeArr.includes(e)) {
                 this.timeArr.push(e);
             } else {
                 this.timeArr.splice(index, 1);
             }
-            console.log(this.timeArr);
+            // console.log(this.timeArr);
         },
         deleteIng(e) {
             let index = this.ingQuery.findIndex(i => i === e);
@@ -150,7 +160,7 @@ export default {
                 .then(response => {
                     let results = response.data.results;
 										this.recipes = results;
-										console.log(results);
+										// console.log(results);
 
                     // this.recipes.forEach(recipe => {
                     //     let prepTime = this.pt(recipe.prepTime);
