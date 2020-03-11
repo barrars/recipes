@@ -5,7 +5,7 @@ const cors = require('cors')
 const recipeRouter = require('./routes/recipeRouter')
 require('./db/db')
 var logger = require('./helpers/mylogger')
-const port = 3000
+const port = 3003
 // var indexRouter = require('./routes/index')
 app.use(express.json())
 app.use(cors())
