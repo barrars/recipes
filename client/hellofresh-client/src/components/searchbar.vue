@@ -146,7 +146,7 @@ export default {
             this.recipes = [];
             // let timeObj = {};
             axios
-                .get("http://localhost:3000/api/recipe/" + this.ingredient)
+                .get("http://recipes.barrars.com/api/recipe/" + this.ingredient)
                 .then(response => {
                     let results = response.data.results;
 										this.recipes = results;
