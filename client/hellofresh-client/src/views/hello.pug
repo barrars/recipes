@@ -8,7 +8,7 @@
       a(:href=`data.cardLink`, target='_blank' v-for='(data, index) in filter' :key='index' v-if='(index < 10)')
         li.box.tile.is-child
           .has-text-left
-            .tag.is-primary
+            .tag.is-primary.is-pulled-right
               p {{data.category.slug }} {{pt(data.prepTime)}}
                 i.far.fa-clock
             p.title.is-4 {{data.name}}
