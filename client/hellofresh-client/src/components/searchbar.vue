@@ -154,9 +154,11 @@ export default {
         async search() {
             this.returnedCookTimeObj = {};
             this.recipes = [];
-            // let timeObj = {};
+						// let timeObj = {};
+						// "https://recipes.barrars.com/api/recipe/"
+						// "http://localhost:3004/api/recipe/"
             axios
-                .get("https://recipes.barrars.com/api/recipe/" + this.ingredient)
+                .get("https://recipes.barrars.com/api/recipe/"+ this.ingredient)
                 .then(response => {
                     let results = response.data.results;
 										this.recipes = results;
