@@ -26,7 +26,8 @@ router.get('/:ingredient', async (req, res, next) => {
   console.timeEnd('search')
   // result.count = await Recipe.countDocuments({ 'ingredients.name': { $all: makeArr(str) } })
   // logger.log(JSON.stringify(result, null, 2))
-  res.json(result)
+  // res.json(result)
+  res.send(result)
   console.timeEnd('search2')
 })
 

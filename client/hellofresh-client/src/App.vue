@@ -26,7 +26,7 @@ export default {
 
 <style scoped >
 #app {
-    background: #eeeeee;
-		height: 100%;
+    /* background: #eeeeee;
+		height: 100%; */
 }
 </style>
