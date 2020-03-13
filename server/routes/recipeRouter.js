@@ -21,7 +21,7 @@ router.get('/:ingredient', async (req, res, next) => {
   const result = {}
   console.log(makeArr(str))
   console.time('search')
-  result.results = await Recipe.find({ 'ingredients.name': { $all: makeArr(str) } }).select('headline category.slug ingredients.name name imagePath prepTime')
+  result.results = await Recipe.find({ 'ingredients.name': { $all: makeArr(str) } }).select('cardLink headline category.slug ingredients.name name imagePath prepTime')
   // result.results = await Recipe.find({ $text: { $search: str } })
   console.timeEnd('search')
   // result.count = await Recipe.countDocuments({ 'ingredients.name': { $all: makeArr(str) } })
