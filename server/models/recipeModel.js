@@ -67,5 +67,6 @@ const Recipe = new Schema(
   }
 )
 Recipe.index({ 'ingredients.name': 1 })
+Recipe.index({ 'ingredients.name': 'text' })
 
 module.exports = mongoose.model('Recipe', Recipe)
