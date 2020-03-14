@@ -24,7 +24,9 @@ router.get('/:ingredient', async (req, res, next) => {
   // result.count = await Recipe.countDocuments({ 'ingredients.name': { $all: makeArr(str) } })
   // logger.log(JSON.stringify(result, null, 2))
   // res.json(result)
-  res.send(result)
+  res.setHeader('Content-Type', 'application/json')
+  res.end(JSON.stringify(result))
+  // res.send(result)
 })
 
 module.exports = router
