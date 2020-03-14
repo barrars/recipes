@@ -6,6 +6,7 @@ const Recipe = require('../models/recipeModel')
 // const RecipeController = require('../controllers/recipeController.js')
 // '/api/recipe'
 router.get('/:ingredient', async (req, res, next) => {
+  console.time('search')
   const str = req.params.ingredient
   logger.log(':ingredient route hit ' + str)
   const makeArr = (str) => {
@@ -26,6 +27,7 @@ router.get('/:ingredient', async (req, res, next) => {
   // res.json(result)
   res.setHeader('Content-Type', 'application/json')
   res.end(JSON.stringify(result))
+  console.timeEnd('search')
   // res.send(result)
 })
 
