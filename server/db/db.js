@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 var logger = require('../helpers/mylogger')
 
+// local development
 // mongoose.connect('mongodb://localhost/helloFresh', {
 //   useNewUrlParser: true,
 //   useCreateIndex: true,
@@ -14,7 +15,7 @@ var logger = require('../helpers/mylogger')
 //   useFindAndModify: false,
 //   useUnifiedTopology: true
 // })
-
+// live
 mongoose
   .connect('mongodb://blurr123:blurr123@ds125073.mlab.com:25073/jumpstart', {
     useNewUrlParser: true,

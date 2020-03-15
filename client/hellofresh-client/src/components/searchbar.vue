@@ -9,6 +9,7 @@ import axios from "axios";
 export default {
     data() {
         return {
+						searching: false,
             timeArr: [],
             displayedRecipes: [],
             ingQuery: [],
@@ -152,28 +153,30 @@ export default {
             }
         },
         async search() {
+					this.searching = true
             this.returnedCookTimeObj = {};
             this.recipes = [];
 						// let timeObj = {};
 						// "https://recipes.barrars.com/api/recipe/"
 						// "http://localhost:3004/api/recipe/"
             axios
-                .get("https://recipes.barrars.com/api/recipe/"+ this.ingredient)
+                .get("http://localhost:3004/api/recipe/"+ this.ingredient)
                 .then(response => {
-                    let results = response.data.results;
+									let results = response.data.results;
 										this.recipes = results;
 										// console.log(results);
 
                     // this.recipes.forEach(recipe => {
-                    //     let prepTime = this.pt(recipe.prepTime);
+											//     let prepTime = this.pt(recipe.prepTime);
                     //     if (!timeObj[prepTime]) {
-                    //         timeObj[prepTime] = 1;
+											//         timeObj[prepTime] = 1;
                     //     } else {
-                    //         timeObj[prepTime]++;
+											//         timeObj[prepTime]++;
                     //     }
                     // });
 
                     // return timeObj;
+						this.searching = false
                 })
                 .catch(error => console.error(error));
             this.ingredient = "";

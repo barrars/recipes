@@ -1,6 +1,11 @@
 .container
   include ./drop
   div
+    //- .modal.is-active
+    .modal(:class="{'is-active' : searching}")
+      .modal-background
+      .modal-content
+        .box.has-text-centered searching ...
     span.tag.button( v-for='(value,time,   index) in cookTime' :key='index' @click='timeClick(time)') {{time}} min({{value}})
   p(v-if='(filter.length)') {{filter.length}} recipes found
   .tile.is-ancestor.is-12
