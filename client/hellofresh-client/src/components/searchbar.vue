@@ -158,9 +158,9 @@ export default {
             this.recipes = [];
 						// let timeObj = {};
 						// "https://recipes.barrars.com/api/recipe/"
-						// "http://localhost:3004/api/recipe/"
+						// "https://localhost:3004/api/recipe/"
             axios
-                .get("http://localhost:3004/api/recipe/"+ this.ingredient)
+                .get("https://recipes.barrars.com/api/recipe/"+ this.ingredient)
                 .then(response => {
 									let results = response.data.results;
 										this.recipes = results;
