@@ -12,4 +12,4 @@ mongoose.connect('mongodb://localhost/users', {
   })
   .catch(error => {
     logger.log(error.message)
-  })
+  });

@@ -3,6 +3,7 @@ var path = require('path')
 const app = express()
 const cors = require('cors')
 const recipeRouter = require('./routes/recipeRouter')
+const cardRouter = require('./routes/cardRouter')
 require('./db/db')
 var logger = require('./helpers/mylogger')
 const port = 3004
@@ -20,5 +21,6 @@ app.set('views', path.join(__dirname, 'views'))
 
 // app.use('/', indexRouter)
 app.use('/api/recipe', recipeRouter)
+app.use('/api/card', cardRouter)
 
 app.listen(port, () => logger.log(`listening on port ${port}!`))

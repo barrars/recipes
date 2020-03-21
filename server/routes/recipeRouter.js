@@ -18,9 +18,9 @@ router.get('/:ingredient', async (req, res, next) => {
     return arr
   }
   // const result = await RecipeController.findByIngredients(ingredient)
-  const result = {}
+  // const result = {}
   console.log(makeArr(str))
-  result.results = await Recipe.find({ 'ingredients.name': { $all: makeArr(str) } }).select('cardLink headline category.slug ingredients.name name imagePath prepTime')
+  const results = JSON.stringify(await Recipe.find({ 'ingredients.name': { $all: makeArr(str) } }).select('headline _id category.slug ingredients.name name imagePath prepTime cardLink'))
   // result.results = await Recipe.find({ $text: { $search: str } })
   // result.count = await Recipe.countDocuments({ 'ingredients.name': { $all: makeArr(str) } })
   // logger.log(JSON.stringify(result, null, 2))
@@ -28,7 +28,7 @@ router.get('/:ingredient', async (req, res, next) => {
   // res.setHeader('Content-Type', 'application/json')
   // res.end(JSON.stringify(result))
   console.timeEnd('search')
-  res.send(result)
+  res.end(results)
 })
 
 module.exports = router

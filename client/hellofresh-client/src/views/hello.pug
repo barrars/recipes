@@ -10,15 +10,19 @@
   p(v-if='(filter.length)') {{filter.length}} recipes found
   .tile.is-ancestor.is-12
     ul.tile.is-parent.is-vertical.is-6
-      a(:href=`data.cardLink`, target='_blank' v-for='(data, index) in filter' :key='index' v-if='(index < 10)')
-        li.box.tile.is-child
-          .has-text-left
-            .tag.is-primary.is-pulled-right
-              p {{data.category.slug }} {{pt(data.prepTime)}}
-                i.far.fa-clock
-            p.title.is-4 {{data.name}}
-            p.heading {{data.headline}}
-          img(:src=`imgPrefix + data.imagePath`)
+      div( v-for='(data, index) in filter' :key='index')
+        <router-link :to="{name: 'Card', params:{id:data._id}}" >
+
+          //- a(target='_blank' v-if='(index < 10)' :href=`data.cardLink`)
+          li.box.tile.is-child
+            .has-text-left
+              .tag.is-primary.is-pulled-right
+                p {{data.category.slug }} {{pt(data.prepTime)}}
+                  i.far.fa-clock
+              p.title.is-4 {{data.name}}
+              p.heading {{data.headline}}
+            img(:src=`imgPrefix + data.imagePath`)
+        </router-link>
     div
       span.tag.button(v-for='(ing, index) in ingredients' :key='index' :title="ing.count + ' recipes'" @click='ingClick(ing.ing)') {{ing.ing}}({{ing.count}})
 

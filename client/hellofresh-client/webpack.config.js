@@ -7,13 +7,13 @@ module.exports = {
       // AND `<style lang="scss">` blocks in `.vue` files
       {
         test: /\.styl(us)?$/,
-        use: ["vue-style-loader", "css-loader", "stylus-loader"]
+        use: ['vue-style-loader', 'css-loader', 'stylus-loader']
       },
       {
         test: /\.pug$/,
-        loader: "pug-plain-loader"
+        loader: 'pug-plain-loader'
       }
     ]
   }
   // plugin omitted
-};
+}

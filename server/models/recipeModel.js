@@ -66,7 +66,7 @@ const Recipe = new Schema(
     timestamps: true
   }
 )
-Recipe.index({ 'ingredients.name': 1 })
-Recipe.index({ 'ingredients.name': 'text' })
+Recipe.index({ ingredients: 1 })
+Recipe.index({ ingredients: 'text' })
 
 module.exports = mongoose.model('Recipe', Recipe)
