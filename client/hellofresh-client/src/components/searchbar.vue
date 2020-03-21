@@ -13,7 +13,7 @@ export default {
       timeArr: [],
       displayedRecipes: [],
       ingQuery: [],
-      recipes: this.$store.state.recipes,
+      recipes: this.$store.state.recipes ? this.$store.state.recipes : [],
       ingarr: [],
       ingredient: '',
       ingListFilter: [],
@@ -25,8 +25,6 @@ export default {
   // name: 'search',
   watch: {
     ingredient: function () {
-      console.log(this.ingredient)
-
       if (this.ingredient > 3) {
         this.ingFilter(this.ingredient)
       }
@@ -49,24 +47,28 @@ export default {
       // console.log(timeArr);
 
       const q = this.ingQuery
-      this.recipes.results.forEach(recipe => {
-        const ingArr = []
-        recipe.ingredients.forEach(ing => {
-          ingArr.push(ing.name)
-        })
-        if (!timeArr.length && q.every(i => ingArr.includes(i))) {
+      if (this.recipes) {
+        console.log(this.recipes)
+
+        this.recipes.forEach(recipe => {
+          const ingArr = []
+          recipe.ingredients.forEach(ing => {
+            ingArr.push(ing.name)
+          })
+          if (!timeArr.length && q.every(i => ingArr.includes(i))) {
           // console.log({q});
           // console.log(this.timeArr);
 
-          filteredRecipes.push(recipe)
-        } else if (
-          timeArr.length &&
+            filteredRecipes.push(recipe)
+          } else if (
+            timeArr.length &&
                     q.every(i => ingArr.includes(i)) &&
                     this.timeArr.includes(recipe.prepTime.slice(2, -1))
-        ) {
-          filteredRecipes.push(recipe)
-        }
-      })
+          ) {
+            filteredRecipes.push(recipe)
+          }
+        })
+      }
       // console.log(filteredRecipes)
       // console.log(this.timeArr);
 
@@ -186,6 +188,7 @@ export default {
           console.log(results)
           this.$store.state.recipes = results
           this.recipes = this.$store.state.recipes.results
+          this.recipes = results
           this.searching = false
           console.log(this.recipes)
         })
