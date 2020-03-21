@@ -10,7 +10,7 @@
   p(v-if='(filter.length)') {{filter.length}} recipes found
   .tile.is-ancestor.is-12
     ul.tile.is-parent.is-vertical.is-6
-      div( v-for='(data, index) in filter' :key='index')
+      div( v-for='(data, index) in filter' :key='index' v-if='(index<10)')
         <router-link :to="{name: 'Card', params:{id:data._id}}" >
 
           //- a(target='_blank' v-if='(index < 10)' :href=`data.cardLink`)
