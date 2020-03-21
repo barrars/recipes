@@ -1,5 +1,5 @@
 <template lang='pug'>
-  div
+  div.maxWidth.container
     .tile.is-ancestor
       div.tile.is-parent
         .box.tile
@@ -22,9 +22,9 @@
       .box.ingredients( v-for='(item, index) in recipe.ingredients' :key='index')
           p {{item.name}}
           img(v-if='(item.imagePath)' :src=`ingredientPrefix + item.imagePath`)
-    .is-parent.tile.content
-      blockquote.tile.is-child( v-for='(item, index) in recipe.steps' :key='index')
-        span.is-size-4 {{item.index}}.
+    .is-parent.tile.content.is-vertical
+      .tile.is-child( v-for='(item, index) in recipe.steps' :key='index')
+        p.is-size-4 {{item.index}}.
           span.is-size-6 {{item.instructions}}
           p.timer.subtitle(v-if='(item.timers[0])') {{item.timers[0].name}}, {{item.timers[0].duration}}
           img(v-if='(item.images[0])' :src=`stepPrefix + item.images[0].path`)
@@ -69,6 +69,9 @@ export default {
 </script>
 
 <style scoped>
+.maxWidth{
+  max-width: 770px;
+}
 .bg{
   color: red;
   background-image : url("{{cardPrefix + recipe.imagePath}}")
@@ -104,7 +107,7 @@ li{
   color: red;
   }
   hr{
-    color: black;
+    background: black;
     margin: 0;
     padding: 0;
   }
