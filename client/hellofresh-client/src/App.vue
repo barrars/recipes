@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link to="/card">card</router-link> |
+        <!-- <router-link to="/card">card</router-link> | -->
         <router-link to="/">home</router-link>
         <router-view />
     </div>
