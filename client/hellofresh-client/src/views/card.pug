@@ -1,0 +1,10 @@
+.container
+	p card
+	p hi {{msg}}
+	p {{recipe.category.slug }} {{pt(data.prepTime)}}
+		i.far.fa-clock
+	p.title.is-4 {{data.name}}
+	p.heading {{data.headline}}
+	img(:src=`imgPrefix + data.imagePath`)
+	</router-link>
+	//- p {{$state.count}}
