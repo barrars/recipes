@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 var logger = require('../helpers/mylogger')
+require('dotenv').config()
+
 
 // local development
 // mongoose.connect('mongodb://localhost/helloFresh', {
@@ -17,7 +19,7 @@ var logger = require('../helpers/mylogger')
 // })
 // live
 mongoose
-  .connect('mongodb://blurr123:blurr123@ds125073.mlab.com:25073/jumpstart', {
+  .connect(process.env.dbURL, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
