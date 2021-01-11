@@ -9,6 +9,8 @@ router.get('/:id', async (req, res, next) => {
 	logger.log(str);
 
   logger.log(':id route hit ' + str)
+  logger.log(req.ip)
+
 
   const results = await Recipe.findById(str)
 

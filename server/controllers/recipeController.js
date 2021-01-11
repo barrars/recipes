@@ -1,12 +1,15 @@
 const Recipe = require('../models/recipeModel')
+const db = require('../db/db')
+
 var logger = require('../helpers/mylogger')
 
 module.exports = {
-  find: () => Recipe.aggregate([{ $match: { 'ingredients.name': 'Olive Oil' } }], (err, docs) => {
+  find: () => Recipe.aggregate([{ $match: { 'ingredients.name': 'Avocado' } }], (err, docs) => {
     if (err) {
       console.error(err)
     }
     console.log(docs)
+    logger.log('done')
   }),
 
   findIngredients: () => Recipe.find({}, { 'ingredients.name': 1 }),

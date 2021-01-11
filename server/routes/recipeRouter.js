@@ -8,6 +8,7 @@ const Recipe = require('../models/recipeModel')
 router.get('/:ingredient', async (req, res, next) => {
   const str = req.params.ingredient
   logger.log(':ingredient route hit ' + str)
+  logger.log(req.ip)
   const makeArr = (str) => {
     const arr = []
     str.split(' ').forEach(element => {
