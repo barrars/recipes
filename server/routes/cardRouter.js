@@ -11,6 +11,7 @@ router.get('/:id', async (req, res, next) => {
   logger.log(':id route hit ' + str)
   logger.log(req.ip)
   logger.log(req.connection.remoteAddress)
+  logger.log(req.headers['x-forwarded-for'] )
 
 
 
