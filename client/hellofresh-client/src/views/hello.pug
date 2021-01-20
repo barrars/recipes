@@ -6,8 +6,9 @@
       .modal-background
       .modal-content
         .box.has-text-centered searching ...
-    span.tag.button( v-for='(value,time,   index) in cookTime' :key='index' @click='timeClick(time)') {{time}} min({{value}})
-  p(v-if='(filter.length)') {{filter.length}} recipes found
+  span.tag.button( v-for='(value,time,   index) in cookTime' :key='index' @click='timeClick(time)') {{time}} min({{value}})
+  p(v-if='(filter.length)') {{filter.length}} recipes found for:
+    span  '{{initialQuery}}'
   .tile.is-ancestor.is-12
     ul.tile.is-parent.is-vertical.is-6
       div( v-for='(data, index) in filter' :key='index' v-if='(index<10)')

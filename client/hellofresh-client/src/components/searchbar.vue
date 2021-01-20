@@ -9,81 +9,55 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      searching: false,
-      timeArr: [],
-      displayedRecipes: [],
+      // count: '',
+      // displayedRecipes: [],
+      ingarr: [],
+      imgPrefix:
+        'https://img.hellofresh.com/f_auto,fl_lossy,h_100/hellofresh_s3/',
+      ingDropDown: [],
+      ingredient: '',
       ingQuery: [],
       recipes: this.$store.state.recipes ? this.$store.state.recipes : [],
-      ingarr: [],
-      ingredient: '',
-      ingListFilter: [],
-      count: '',
-      imgPrefix:
-                'https://img.hellofresh.com/f_auto,fl_lossy,h_100/hellofresh_s3/'
+      searching: false,
+      timeArr: [],
+      initialQuery: this.$store.state.initialQuery ? this.$store.state.initialQuery : ''
     }
   },
-  // name: 'search',
-  watch: {
-    ingredient: function () {
-      if (this.ingredient > 3) {
-        this.ingFilter(this.ingredient)
-      }
-    }
-  },
-  computed: {
-    ingredientLengthCheck () {
-      return function () {
-        if (this.ingredient > 3) {
-          this.ingFilter(this.ingredient)
-        }
-      }
-    },
-    filter () {
-      console.log(this.recipes)
-      console.log(this.$store.state)
 
+  computed: {
+
+    filter () {
       const filteredRecipes = []
       const timeArr = this.timeArr
-      // console.log(timeArr);
-
       const q = this.ingQuery
       if (this.recipes) {
-        console.log(this.recipes)
+        this.recipes.forEach((recipe) => {
+          const ingArr = recipe.ingredients.map(a => a.name)
 
-        this.recipes.forEach(recipe => {
-          const ingArr = []
-          recipe.ingredients.forEach(ing => {
-            ingArr.push(ing.name)
-          })
-          if (!timeArr.length && q.every(i => ingArr.includes(i))) {
-          // console.log({q});
-          // console.log(this.timeArr);
-
+          if (!timeArr.length && q.every((i) => ingArr.includes(i))) {
             filteredRecipes.push(recipe)
           } else if (
             timeArr.length &&
-                    q.every(i => ingArr.includes(i)) &&
-                    this.timeArr.includes(recipe.prepTime.slice(2, -1))
+            q.every((i) => ingArr.includes(i)) &&
+            this.timeArr.includes(recipe.prepTime.slice(2, -1))
           ) {
             filteredRecipes.push(recipe)
           }
         })
       }
-      // console.log(filteredRecipes)
-      // console.log(this.timeArr);
 
       return filteredRecipes
     },
     ingredients () {
       let obj = {}
-      this.filter.forEach(recipe => {
-        recipe.ingredients.forEach(ingredient => {
+      this.filter.forEach((recipe) => {
+        recipe.ingredients.forEach((ingredient) => {
           const ingr = ingredient.name
           // let i = ingredient.name.toLowerCase();
           if (
             ingr === 'Salt' ||
-                        ingr === 'Pepper' ||
-                        this.ingQuery.includes(ingr)
+            ingr === 'Pepper' ||
+            this.ingredient.includes(ingr)
           ) {
             return
           }
@@ -98,7 +72,7 @@ export default {
     },
     cookTime () {
       const obj = {}
-      this.filter.forEach(result => {
+      this.filter.forEach((result) => {
         const prepTime = this.pt(result.prepTime)
         if (!obj[prepTime]) {
           obj[prepTime] = 1
@@ -116,13 +90,15 @@ export default {
       let text = e.target.innerText
       this.ingredient = text
       this.search()
+      this.initialQuery = text
+      console.log(this.initialQuery)
       this.ingredient = ''
       text = ''
       this.ingFilter(text)
     },
     timeClick (e) {
       // console.log(e);
-      const index = this.timeArr.findIndex(i => i === e)
+      const index = this.timeArr.findIndex((i) => i === e)
       if (!this.timeArr.includes(e)) {
         this.timeArr.push(e)
       } else {
@@ -131,7 +107,7 @@ export default {
       // console.log(this.timeArr);
     },
     deleteIng (e) {
-      const index = this.ingQuery.findIndex(i => i === e)
+      const index = this.ingQuery.findIndex((i) => i === e)
       this.ingQuery.splice(index, 1)
     },
     ingClick (e) {
@@ -158,42 +134,42 @@ export default {
     },
     ingFilter (ingredient) {
       if (ingredient.length < 2) {
-        this.ingListFilter = []
+        this.ingDropDown = []
       }
       if (ingredient.length > 2) {
-        this.ingListFilter = []
-        this.ingListFilter.push(ingredient)
+        this.ingDropDown = []
+        this.initialQuery = ingredient
+        this.ingDropDown.push(ingredient)
 
         const reg = new RegExp(ingredient, 'i')
-        ingredients.forEach(ingr => {
+        ingredients.forEach((ingr) => {
           const a = ingr.match(reg)
           if (a) {
-            this.ingListFilter.push(a.input)
+            this.ingDropDown.push(a.input)
           }
         })
       }
     },
-    async search () {
-      console.log(this.recipes)
-
-      this.searching = true
-      this.returnedCookTimeObj = {}
-      this.recipes = []
-      // "https://recipes.barrars.com/api/recipe/"
-      // "https://localhost:3004/api/recipe/"
-      axios
-        .get('https://recipes.barrars.com/api/recipe/' + this.ingredient)
-        .then(response => {
-          const results = response.data
-          console.log(results)
-          this.$store.state.recipes = results
-          this.recipes = this.$store.state.recipes.results
-          this.recipes = results
-          this.searching = false
-          console.log(this.recipes)
-        })
-        .catch(error => console.error(error))
-      this.ingredient = ''
+    search () {
+      if (this.ingredient.length > 2) {
+        this.searching = true
+        this.returnedCookTimeObj = {}
+        this.recipes = []
+        this.$store.state.initialQuery = this.ingredient
+        axios
+          .get('https://recipes.barrars.com/api/recipe/' + this.ingredient)
+          .then((response) => {
+            const results = response.data
+            // console.log(results)
+            this.$store.state.recipes = results
+            // this.recipes = this.$store.state.recipes.results
+            this.recipes = results
+            this.searching = false
+            console.log(this.recipes)
+          })
+          .catch((error) => console.error(error))
+        this.ingredient = ''
+      }
     }
   }
 }
