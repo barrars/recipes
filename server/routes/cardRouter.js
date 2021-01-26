@@ -9,9 +9,7 @@ router.get('/:id', async (req, res, next) => {
 	logger.log(str);
 
   logger.log(':id route hit ' + str)
-  logger.log(req.ip)
-  logger.log(req.connection.remoteAddress)
-  logger.log(req.headers)
+  logger.log(req.headers['x-real-ip'])
 
 
 

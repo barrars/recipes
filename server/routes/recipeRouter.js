@@ -7,7 +7,7 @@ const Recipe = require('../models/recipeModel')
 // '/api/recipe'
 router.get('/:ingredient', async (req, res, next) => {
   const str = req.params.ingredient
-  logger.log(':ingredient route hit ' + str)
+  // logger.log(':ingredient route hit ' + str)
   logger.log(req.ip)
   const makeArr = (str) => {
     const arr = []
@@ -19,7 +19,8 @@ router.get('/:ingredient', async (req, res, next) => {
   }
   // const result = await RecipeController.findByIngredients(ingredient)
   // const result = {}
-  console.log(makeArr(str))
+  logger.log(makeArr(str))
+  logger.log(req.headers['x-real-ip'])
   const results = JSON.stringify(await Recipe.find({ 'ingredients.name': { $all: makeArr(str) } }).select('headline _id category.slug ingredients.name name imagePath prepTime cardLink'))
   // result.results = await Recipe.find({ $text: { $search: str } })
   // result.count = await Recipe.countDocuments({ 'ingredients.name': { $all: makeArr(str) } })
