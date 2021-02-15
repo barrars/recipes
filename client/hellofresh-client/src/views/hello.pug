@@ -1,12 +1,14 @@
 .container
+  a.fresh(href="https://www.hellofresh.com/pages/share?c=HS-8IV2DDSP8&utm_campaign=clipboard&utm_couponvalue=40&utm_medium=referral&utm_source=raf-share", title="title") Get $40 off your first delivery
   include ./drop
   div
-    //- .modal.is-active
     .modal(:class="{'is-active' : searching}")
       .modal-background
       .modal-content
         .box.has-text-centered searching ...
-    span.tag.button( v-for='(value,time,   index) in cookTime' :key='index' @click='timeClick(time)') {{time}} min({{value}})
+
+  span.tag.button(v-for='(value,time,   index) in cookTime' :key='index' @click='timeClick(time)') {{time}} min({{value}})
+  //- span (cook time)
   p(v-if='(filter.length)') {{filter.length}} recipes found
   .tile.is-ancestor.is-12
     ul.tile.is-parent.is-vertical.is-6
@@ -23,7 +25,9 @@
               p.heading {{data.headline}}
             img(:src=`imgPrefix + data.imagePath`)
         </router-link>
-    div
-      span.tag.button(v-for='(ing, index) in ingredients' :key='index' :title="ing.count + ' recipes'" @click='ingClick(ing.ing)') {{ing.ing}}({{ing.count}})
+    div.is-parent.tile
+      div.tile.is-child
+        //- p INGREDIRENTS LIST
+        span.tag.button(v-for='(ing, index) in ingredients' :key='index' :title="ing.count + ' recipes'" @click='ingClick(ing.ing)') {{ing.ing}}({{ing.count}})
 
 
